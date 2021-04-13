@@ -1,10 +1,13 @@
 import { Formik, Field, Form } from "formik";
-import "bootstrap/dist/css/bootstrap.min.css";
 import * as Yup from "yup";
+import { InputText } from "../helpers/Formik/inputText";
+import { InputEmail } from "../helpers/Formik/inputEmail";
+import { InputTextArea } from "../helpers/Formik/inputTextArea";
 
 const ContactUsForm = () => {
   const initialValues = {
-    name: "",
+    firstName: "",
+    lastName: "",
     email: "",
     subject: "",
     content: "",
@@ -15,10 +18,14 @@ const ContactUsForm = () => {
   };
 
   const validationSchema = Yup.object().shape({
-    name: Yup.string()
+    firstName: Yup.string()
       .min(2, "Must be 2 characters or more")
       .max(15, "Must be 15 characters or less")
-      .required("Name is required"),
+      .required("FirstName is required"),
+    lastName: Yup.string()
+      .min(2, "Must be 2 characters or more")
+      .max(15, "Must be 15 characters or less")
+      .required("LastName is required"),
     subject: Yup.string().required("Subject is required"),
     email: Yup.string()
       .email("Invalid email address")
@@ -55,69 +62,28 @@ const ContactUsForm = () => {
       }) => (
         <Form className="form form-label-right">
           <div className="form-group">
-            <label htmlFor="name">Name</label>
-            <Field
-              name="name"
-              className={
-                touched.name && errors.name
-                  ? "form-control is-invalid"
-                  : "form-control"
-              }
-              type="text"
-            />
-            {touched.name && errors.name ? (
-              <div className="invalid-feedback">{errors.name}</div>
-            ) : null}
+            <label htmlFor="firstName">FirstName</label>
+            <InputText name="firstName" touched={touched} errors={errors} />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="lastName">LastName</label>
+            <InputText name="lastName" touched={touched} errors={errors} />
           </div>
 
           <div className="form-group">
             <label htmlFor="email">Email Address</label>
-            <Field
-              name="email"
-              className={
-                touched.email && errors.email
-                  ? "form-control is-invalid"
-                  : "form-control"
-              }
-              type="email"
-            />
-            {touched.email && errors.email ? (
-              <div className="invalid-feedback">{errors.email}</div>
-            ) : null}
+            <InputEmail name="email" touched={touched} errors={errors} />
           </div>
 
           <div className="form-group">
             <label htmlFor="subject">Subject</label>
-            <Field
-              name="subject"
-              className={
-                touched.subject && errors.subject
-                  ? "form-control is-invalid"
-                  : "form-control"
-              }
-              type="text"
-            />
-            {touched.subject && errors.subject ? (
-              <div className="invalid-feedback">{errors.subject}</div>
-            ) : null}
+            <InputText name="subject" touched={touched} errors={errors} />
           </div>
 
           <div className="form-group">
             <label htmlFor="content">Content</label>
-            <Field
-              name="content"
-              className={
-                touched.content && errors.content
-                  ? "form-control is-invalid"
-                  : "form-control"
-              }
-              as="textarea"
-              rows={3}
-              cols={10}
-            />
-            {touched.content && errors.content ? (
-              <div className="invalid-feedback">{errors.content}</div>
-            ) : null}
+            <InputTextArea name="content" touched={touched} errors={errors} />
           </div>
 
           <div className="form-group">
