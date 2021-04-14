@@ -5,6 +5,7 @@ import {
   InputEmail,
   InputTextArea,
   InputSelect,
+  InputTrueFalse,
 } from "../helpers/Formik";
 
 const ContactUsForm = () => {
@@ -120,7 +121,13 @@ const ContactUsForm = () => {
 
           <div className="form-group">
             <div className="form-check">
-              <Field
+              <InputTrueFalse
+                name="terms"
+                touched={touched}
+                errors={errors}
+                label="Accept Terms & Conditions"
+              />
+              {/* <Field
                 name="terms"
                 className={
                   touched.terms && errors.terms
@@ -135,7 +142,7 @@ const ContactUsForm = () => {
               </label>
               {touched.terms && errors.terms ? (
                 <div className="invalid-feedback">{errors.terms}</div>
-              ) : null}
+              ) : null} */}
             </div>
           </div>
 
