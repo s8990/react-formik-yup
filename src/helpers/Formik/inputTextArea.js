@@ -1,9 +1,10 @@
 import React from "react";
 import { Field } from "formik";
 
-export const InputTextArea = ({ name, touched, errors, rows, cols }) => {
+export const InputTextArea = ({ name, label, touched, errors, rows, cols }) => {
   return (
-    <React.Fragment>
+    <div className="form-group">
+      <label htmlFor={name}>{label}</label>
       <Field
         name={name}
         className={
@@ -18,6 +19,6 @@ export const InputTextArea = ({ name, touched, errors, rows, cols }) => {
       {touched[name] && errors[name] ? (
         <div className="invalid-feedback">{errors[name]}</div>
       ) : null}
-    </React.Fragment>
+    </div>
   );
 };

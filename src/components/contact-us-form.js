@@ -78,84 +78,70 @@ const ContactUsForm = () => {
         handleReset,
       }) => (
         <Form className="form form-label-right">
-          <div className="form-group">
-            <label htmlFor="firstName">FirstName</label>
-            <InputText name="firstName" touched={touched} errors={errors} />
-          </div>
+          <InputText
+            name="firstName"
+            label="FirstName"
+            touched={touched}
+            errors={errors}
+          />
 
-          <div className="form-group">
-            <label htmlFor="lastName">LastName</label>
-            <InputText name="lastName" touched={touched} errors={errors} />
-          </div>
+          <InputText
+            name="lastName"
+            label="LastName"
+            touched={touched}
+            errors={errors}
+          />
 
-          <div className="form-group">
-            <label htmlFor="age">Your Age</label>
-            <InputNumber name="age" touched={touched} errors={errors} />
-          </div>
+          <InputNumber
+            name="age"
+            label="Your Age"
+            touched={touched}
+            errors={errors}
+          />
 
-          <div className="form-group">
-            <label htmlFor="email">Email Address</label>
-            <InputEmail name="email" touched={touched} errors={errors} />
-          </div>
+          <InputEmail
+            name="email"
+            label="Email Address"
+            touched={touched}
+            errors={errors}
+          />
 
-          <div className="form-group">
-            <label htmlFor="subject">Subject</label>
-            <InputText name="subject" touched={touched} errors={errors} />
-          </div>
+          <InputText
+            name="subject"
+            label="Subject"
+            touched={touched}
+            errors={errors}
+          />
 
-          <div className="form-group">
-            <label htmlFor="content">Content</label>
-            <InputTextArea
-              name="content"
-              touched={touched}
-              errors={errors}
-              rows={3}
-              cols={10}
-            />
-          </div>
+          <InputTextArea
+            name="content"
+            label="Content"
+            touched={touched}
+            errors={errors}
+            rows={3}
+            cols={10}
+          />
 
-          <div className="form-group">
-            <label htmlFor="department">Department</label>
-            <InputSelect
-              name="department"
-              touched={touched}
-              errors={errors}
-              multiple={false}
-            >
-              <option value="" label="Please Select..." />
-              <option value="one" label="One" />
-              <option value="two" label="Two" />
-              <option value="three" label="Three" />
-              <option value="four" label="Four" />
-            </InputSelect>
-          </div>
+          <InputSelect
+            name="department"
+            label="Department"
+            touched={touched}
+            errors={errors}
+            multiple={false}
+          >
+            <option value="" label="Please Select..." />
+            <option value="one" label="One" />
+            <option value="two" label="Two" />
+            <option value="three" label="Three" />
+            <option value="four" label="Four" />
+          </InputSelect>
 
-          <div className="form-group">
-            <div className="form-check">
-              <InputTrueFalse
-                name="terms"
-                touched={touched}
-                errors={errors}
-                label="Accept Terms & Conditions"
-              />
-              {/* <Field
-                name="terms"
-                className={
-                  touched.terms && errors.terms
-                    ? "form-check-input is-invalid"
-                    : "form-check-input"
-                }
-                type="checkbox"
-                id="terms"
-              />
-              <label className="form-check-label" htmlFor="terms">
-                Accept Terms & Conditions
-              </label>
-              {touched.terms && errors.terms ? (
-                <div className="invalid-feedback">{errors.terms}</div>
-              ) : null} */}
-            </div>
-          </div>
+          <InputTrueFalse
+            name="terms"
+            label="Accept Terms & Conditions"
+            touched={touched}
+            errors={errors}
+          />
 
           <div className="form-group">
             <label>Gender</label>
@@ -178,7 +164,6 @@ const ContactUsForm = () => {
             </div>
             <div className="form-check">
               <Field
-                // className="form-check-input"
                 className={
                   touched.gender && errors.gender
                     ? "form-check-input is-invalid"
