@@ -1,8 +1,11 @@
 import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
-import { InputText } from "../helpers/Formik/inputText";
-import { InputEmail } from "../helpers/Formik/inputEmail";
-import { InputTextArea } from "../helpers/Formik/inputTextArea";
+import {
+  InputText,
+  InputEmail,
+  InputTextArea,
+  InputSelect,
+} from "../helpers/Formik";
 
 const ContactUsForm = () => {
   const initialValues = {
@@ -14,7 +17,7 @@ const ContactUsForm = () => {
     department: "",
     terms: false,
     gender: "",
-    uploadedfile: undefined,
+    uploadedfile: "",
   };
 
   const validationSchema = Yup.object().shape({
@@ -33,7 +36,12 @@ const ContactUsForm = () => {
     content: Yup.string()
       .min(2, "Must be 2 characters or more")
       .max(100, "Must be 15 characters or less")
-      .required("content is required"),
+      .required("Content is required"),
+    department: Yup.string().required("Department is required"),
+    terms: Yup.boolean()
+      .required("The terms and conditions must be accepted.")
+      .oneOf([true], "The terms and conditions must be accepted."),
+    gender: Yup.string().required("gender is required"),
   });
 
   return (
@@ -59,6 +67,8 @@ const ContactUsForm = () => {
         touched,
         handleBlur,
         isSubmitting,
+        dirty,
+        handleReset,
       }) => (
         <Form className="form form-label-right">
           <div className="form-group">
@@ -83,34 +93,49 @@ const ContactUsForm = () => {
 
           <div className="form-group">
             <label htmlFor="content">Content</label>
-            <InputTextArea name="content" touched={touched} errors={errors} />
+            <InputTextArea
+              name="content"
+              touched={touched}
+              errors={errors}
+              rows={3}
+              cols={10}
+            />
           </div>
 
           <div className="form-group">
-            <label htmlFor="department">department</label>
-            <Field
+            <label htmlFor="department">Department</label>
+            <InputSelect
               name="department"
-              as="select"
+              touched={touched}
+              errors={errors}
               multiple={false}
-              className="form-control"
             >
-              <option value="one">One</option>
-              <option value="two">Two</option>
-              <option value="three">Three</option>
-            </Field>
+              <option value="" label="Please Select..." />
+              <option value="one" label="One" />
+              <option value="two" label="Two" />
+              <option value="three" label="Three" />
+              <option value="four" label="Four" />
+            </InputSelect>
           </div>
 
           <div className="form-group">
             <div className="form-check">
               <Field
                 name="terms"
-                className="form-check-input"
+                className={
+                  touched.terms && errors.terms
+                    ? "form-check-input is-invalid"
+                    : "form-check-input"
+                }
                 type="checkbox"
                 id="terms"
               />
               <label className="form-check-label" htmlFor="terms">
                 Accept Terms & Conditions
               </label>
+              {touched.terms && errors.terms ? (
+                <div className="invalid-feedback">{errors.terms}</div>
+              ) : null}
             </div>
           </div>
 
@@ -118,7 +143,12 @@ const ContactUsForm = () => {
             <label>Gender</label>
             <div className="form-check">
               <Field
-                className="form-check-input"
+                // className="form-check-input"
+                className={
+                  touched.gender && errors.gender
+                    ? "form-check-input is-invalid"
+                    : "form-check-input"
+                }
                 type="radio"
                 name="gender"
                 id="gender1"
@@ -130,7 +160,12 @@ const ContactUsForm = () => {
             </div>
             <div className="form-check">
               <Field
-                className="form-check-input"
+                // className="form-check-input"
+                className={
+                  touched.gender && errors.gender
+                    ? "form-check-input is-invalid"
+                    : "form-check-input"
+                }
                 type="radio"
                 name="gender"
                 id="gender2"
@@ -159,8 +194,16 @@ const ContactUsForm = () => {
 
           <div className="form-group">
             <button
+              type="button"
+              className="btn btn-light"
+              onClick={handleReset}
+              disabled={!dirty || isSubmitting}
+            >
+              Reset
+            </button>
+            <button
               type="submit"
-              className="btn btn-primary"
+              className="btn btn-primary ml-2"
               disabled={isSubmitting}
             >
               {isSubmitting ? "Please wait..." : "Submit"}

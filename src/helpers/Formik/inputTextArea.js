@@ -1,7 +1,7 @@
 import React from "react";
-import { Formik, Field, Form } from "formik";
+import { Field } from "formik";
 
-export const InputTextArea = ({ name, touched, errors }) => {
+export const InputTextArea = ({ name, touched, errors, rows, cols }) => {
   return (
     <React.Fragment>
       <Field
@@ -12,6 +12,8 @@ export const InputTextArea = ({ name, touched, errors }) => {
             : "form-control"
         }
         as="textarea"
+        rows={rows}
+        cols={cols}
       />
       {touched[name] && errors[name] ? (
         <div className="invalid-feedback">{errors[name]}</div>

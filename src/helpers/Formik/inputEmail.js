@@ -1,5 +1,5 @@
 import React from "react";
-import { Formik, Field, Form } from "formik";
+import { Field } from "formik";
 
 export const InputEmail = ({ name, touched, errors }) => {
   return (
