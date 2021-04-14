@@ -2,6 +2,7 @@ import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
 import {
   InputText,
+  InputNumber,
   InputEmail,
   InputTextArea,
   InputSelect,
@@ -12,6 +13,7 @@ const ContactUsForm = () => {
   const initialValues = {
     firstName: "",
     lastName: "",
+    age: "",
     email: "",
     subject: "",
     content: "",
@@ -30,6 +32,10 @@ const ContactUsForm = () => {
       .min(2, "Must be 2 characters or more")
       .max(15, "Must be 15 characters or less")
       .required("LastName is required"),
+    age: Yup.number()
+      .min(8, "minimum = 8")
+      .max(120, "maximum = 120")
+      .required("Age is required"),
     subject: Yup.string().required("Subject is required"),
     email: Yup.string()
       .email("Invalid email address")
@@ -80,6 +86,11 @@ const ContactUsForm = () => {
           <div className="form-group">
             <label htmlFor="lastName">LastName</label>
             <InputText name="lastName" touched={touched} errors={errors} />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="age">Your Age</label>
+            <InputNumber name="age" touched={touched} errors={errors} />
           </div>
 
           <div className="form-group">
